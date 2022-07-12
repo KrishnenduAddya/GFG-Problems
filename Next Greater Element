@@ -1,0 +1,24 @@
+class Solution
+    {
+        //Complete this function
+        public long[] nextLargerElement(long[] arr, int n)
+        {
+            long[] result = new long[n];
+            for(int i = 0; i < n; i++)
+                result[i] = -1;
+            Stack<int> stack = new Stack<int>();
+            for(int i = 0; i < n; i++) 
+            {
+                // For element greater than element for top of stack pop top and fill result
+                while(stack.Count > 0 && arr[i] > arr[stack.Peek()])
+                {
+                    int index = stack.Pop();
+                    result[index] = arr[i];
+                }
+                // Smaller or equal element can be pushed over the top of the array
+                stack.Push(i);
+            }
+            return result;
+        }
+
+    }
