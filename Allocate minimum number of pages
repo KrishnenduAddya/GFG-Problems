@@ -1,0 +1,43 @@
+class Solution
+{
+   //Function to find minimum number of pages.
+    public int findPages(int[] A,int N,int M)
+    {
+        int low = 0, high = 0;
+        
+        // Initialize low with largest page number in the array and high with pages array sum as for single element subarray the least weight capacity will be at atleast the largest weight and for whole array maximum weight will be array sum
+        foreach(int pageno in A)
+        {
+            low = Math.Max(low, pageno);
+            high = high + pageno; // high is treated as sum of pageno
+        }
+        
+        int mid = 0, minimum = 0;
+        while(low <= high)
+        {
+            mid = low + (high - low) / 2; // find minimum
+            // Count stores to how many students all books can be allocated for a given minimum = mid
+            int count = 1, tempPage = 0;
+            foreach(int pageno in A)
+            {
+                if(tempPage + pageno <= mid) // If adding next book, minimum does not exceed then add that page no and can be allocated to same student
+                    tempPage = tempPage + pageno;
+                else // else one extra student will be needed, pageno starts from that book
+                {
+                    tempPage = pageno;
+                    count++;
+                }
+            }
+            
+            // If count <= student i.e allocation possible for minimum = mid, so we will check whether we can minimize the distribution to a less page number
+            if(count <= M)
+            {
+                minimum = mid;
+                high = mid - 1;
+            } // else increase page number
+            else 
+                low = mid + 1;
+        }  
+        return minimum;
+    }
+}
