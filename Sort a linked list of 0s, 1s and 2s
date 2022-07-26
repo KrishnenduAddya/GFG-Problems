@@ -1,0 +1,38 @@
+    // public class Node{
+    //     public int data;
+    //     public Node next;
+        
+    //     public Node(int a){
+    //         this.data = a;
+    //         this.next = null;
+    //     }   
+    // }
+    class Solution
+    {
+        //Complete this function
+        public Node segregate(Node head)
+        {
+            Node curr = head;
+            int[] count = {0, 0, 0};
+            while (curr != null)
+            {
+                count[curr.data]++;
+                curr = curr.next;
+            }
+     
+            int i = 0;
+            curr = head;
+            while (curr != null)
+            {
+                if (count[i] == 0)
+                    i++;
+                else
+                {
+                    curr.data = i;
+                    count[i]--;
+                    curr = curr.next;
+                }
+            }
+            return head;
+        }
+    }
