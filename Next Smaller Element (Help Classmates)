@@ -1,0 +1,21 @@
+class Solution {
+	public static int[] help_classmate(int arr[], int n) 
+	{ 
+	    int[] result = new int[n];
+        for(int i = 0; i < n; i++)
+            result[i] = -1;
+        Stack<Integer> stack = new Stack<Integer>();
+        for(int i = 0; i < n; i++) 
+        {
+            // For element smaller than element for top of stack pop top and fill result
+            while(!stack.isEmpty() && arr[i] < arr[stack.peek()])
+            {
+                int index = stack.pop();
+                result[index] = arr[i];
+            }
+            // Greater or equal element can be pushed over the top of the array
+            stack.push(i);
+        }
+        return result;
+	} 
+}
