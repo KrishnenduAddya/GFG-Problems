@@ -1,0 +1,14 @@
+class Solution {
+    // Function to find the minimum element in the given BST.
+  public
+    int minValue(Node root) {
+        int min = -1;
+        Node curr = root;
+        while(curr != null)
+        {
+            min = curr.data;
+            curr = curr.left;
+        }
+        return min;
+    }
+}
