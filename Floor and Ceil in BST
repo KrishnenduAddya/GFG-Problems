@@ -1,0 +1,48 @@
+// Floor in BST
+
+class Solution {
+
+    // Function to return the floor of given number in BST.
+  public
+    int floor(Node root, int key) {
+        int floor = -1;
+        Node curr = root;
+        while(curr != null)
+        {
+            if(curr.data == key)
+                return key;
+            else if(curr.data < key)
+            {
+                floor = curr.data;
+                curr = curr.right;
+            }
+            else
+                curr = curr.left;
+        }
+        return floor;
+    }
+}
+
+// Ceil in BST
+
+class Solution {
+    // Function to return the ceil of given number in BST.
+  public
+    int findCeil(Node root, int input) {
+        int ceil = -1;
+        Node curr = root;
+        while(curr != null)
+        {
+            if(curr.data == input)
+                return input;
+            else if(curr.data > input)
+            {
+                ceil = curr.data;
+                curr = curr.left;
+            }
+            else
+                curr = curr.right;
+        }
+        return ceil;
+    }
+}
