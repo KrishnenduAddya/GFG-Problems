@@ -1,0 +1,22 @@
+class Solution
+{
+    int counter = 0, element;
+    // return the Kth largest element in the given BST rooted at 'root'
+    public int kthLargest(Node root,int K)
+    {
+        InOrderTraversal(root, K);
+        return element;
+    }
+    
+    private void InOrderTraversal(Node root, int k)
+    {
+        if(root != null)
+        {
+            InOrderTraversal(root.right, k);
+            counter++;
+            if(counter == k)
+                element = root.data;
+            InOrderTraversal(root.left, k);
+        }
+    }
+}
