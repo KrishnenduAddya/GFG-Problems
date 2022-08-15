@@ -1,0 +1,36 @@
+class Solution
+{
+    // The given root is the root of the Binary Tree
+    // Return the root of the generated BST
+    Node binaryTreeToBST(Node root)
+    {
+       List<Integer> inorder = new ArrayList<>();
+       InorderTraversal(root, inorder);
+       Collections.sort(inorder);
+       return ConvertToBST(inorder, 0, inorder.size() - 1);
+    }
+    
+    private void InorderTraversal(Node root, List<Integer> inorder)
+    {
+        if(root != null)
+        {
+            InorderTraversal(root.left, inorder);
+            inorder.add(root.data);
+            InorderTraversal(root.right, inorder);
+        }
+    }
+    
+    private Node ConvertToBST(List<Integer> inorder, int low, int high)
+    {
+        if(low > high)
+            return null;
+        
+        int mid = low + (high - low) / 2;
+        Node root = new Node(inorder.get(mid));
+        
+        root.left = ConvertToBST(inorder, low, mid - 1);
+        root.right = ConvertToBST(inorder, mid + 1, high);
+        
+        return root;
+    }
+}
