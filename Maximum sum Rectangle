@@ -1,0 +1,30 @@
+class Solution {
+    int maximumSumRectangle(int R, int C, int M[][]) {
+        int[] sum = new int[C];
+        int maxSum = Integer.MIN_VALUE;
+        for(int i = 0; i < R; i++)
+        {
+            Arrays.fill(sum, 0);
+            for(int j = i; j < R; j++)
+            {
+                for(int col = 0; col < C; col++)
+                    sum[col] = sum[col] + M[j][col];
+                int currMaxSum = MaxSubArray(sum);
+                maxSum = Math.max(maxSum, currMaxSum);
+            }
+        }
+        return maxSum;
+    }
+    
+    // Kadane's Algorithm to find maximum sum subarray
+    public int MaxSubArray(int[] nums) {
+        int maximum = nums[0];
+        int maxEnding = nums[0];
+        for(int i = 1; i < nums.length; i++)
+        {
+            maxEnding = Math.max(maxEnding + nums[i], nums[i]);
+            maximum = Math.max(maximum, maxEnding);
+        }
+        return maximum;
+    }
+};
