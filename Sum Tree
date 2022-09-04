@@ -1,0 +1,24 @@
+class Solution
+{
+    boolean sumTree = true;
+	boolean isSumTree(Node root)
+	{
+        Traverse(root);
+        return sumTree;
+    }
+    private int Traverse(Node root)
+    {
+        if(root == null)
+            return 0;
+        if(root.left == null && root.right == null)
+            return root.data;
+        if(sumTree == false)
+            return 0;
+        int r = root.data;
+        int a = Traverse(root.left);
+        int b = Traverse(root.right);
+        if(r != a + b)
+            sumTree = false;
+        return r + a + b;
+    }
+}
