@@ -1,0 +1,24 @@
+public List<int> bfsOfGraph(int V, List<List<int>> adj) {
+        Queue<int> queue = new Queue<int>();
+        List<int> result = new List<int>(); 
+        bool[] visited = new bool[V];
+        
+        visited[0] = true;
+        queue.Enqueue(0);
+        while(queue.Count > 0)
+        {
+            int vtx = queue.Dequeue();
+            result.Add(vtx);
+             
+            List<int> list = adj[vtx];
+            foreach (var val in list)            
+            {
+                if (visited[val] == false)
+                {
+                    visited[val] = true;
+                    queue.Enqueue(val);
+                }
+            }
+        }
+        return result;
+    }
