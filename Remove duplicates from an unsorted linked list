@@ -1,0 +1,21 @@
+class Solution
+{
+    public Node removeDuplicates(Node head)
+    {
+        HashSet<int> set = new HashSet<int>();
+        Node curr = head;
+        Node prev = null;
+        while(curr != null)
+        {
+            if(set.Contains(curr.data))
+                prev.next = curr.next;
+            else
+            {
+                set.Add(curr.data);
+                prev = curr;
+            }
+            curr = curr.next;
+        }
+        return head;
+    }
+}
