@@ -1,0 +1,35 @@
+// Here first check whether the number can be formed using S and D using 9 * D < S 
+// as 9 is the maximum digit by which a position can be filled
+// As our goal is to form the minimum possible number so start from the right most (least significant)
+// position and try to fill the bigger digits ( 9 or close to 9)
+// Try to fill left most (most significant) position using smaller digits (1 or close to 1 except 0)
+
+class Solution{
+    static String smallestNumber(int S, int D){
+        if(9 * D < S)
+            return "-1";
+        String ans = "";
+        for(int i = D - 1; i >= 0; i--)
+        {
+            if(S > 9)
+            {
+                ans = '9' + ans;
+                S = S - 9;
+            }
+            else
+            {
+                if(i == 0)
+                    ans = S + ans;
+                else
+                {
+                    ans = (S - 1) + ans;
+                    while(--i > 0)
+                        ans = '0' + ans;
+                    ans = '1' + ans;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
