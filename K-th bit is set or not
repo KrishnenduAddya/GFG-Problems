@@ -1,0 +1,10 @@
+class Solution {
+    public bool CheckKthBit(int n, int k) {
+        // code here
+        // Bit wise and between n and 1 left shifted to k positions
+        if((n & 1 << k) != 0)
+            return true;
+        else
+            return false;
+    }
+}
