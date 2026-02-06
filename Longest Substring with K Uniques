@@ -1,0 +1,39 @@
+// Amazon Google SAP Labs Paytm Morgan Stanley
+
+// Sliding Window + Frequency Map
+
+class Solution {
+    public int longestKSubstr(string s, int k) {
+        int n = s.Length;
+        int maxLen = -1;
+        
+        // Tracks unique characters for current window substring
+        var windowFreq = new Dictionary<char, int>();
+        
+        int left = 0;
+        for(int right = 0; right < n; right++)
+        {
+            // Add/update current character to frequency map
+            if(windowFreq.ContainsKey(s[right]))
+                windowFreq[s[right]]++;
+            else
+                windowFreq.Add(s[right], 1);
+            
+            // Shrink window if distinct chars exceed k
+            while(windowFreq.Count > k)
+            {
+                windowFreq[s[left]]--;
+                if(windowFreq[s[left]] == 0)
+                    windowFreq.Remove(s[left]);
+                left++;
+            }
+            
+            // Check if window has exactly k distinct chars
+            if (windowFreq.Count == k)
+            {
+                maxLen = Math.Max(maxLen, right - left + 1);
+            }
+        }
+        return maxLen;
+    }
+}
