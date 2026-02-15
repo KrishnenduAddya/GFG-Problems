@@ -1,0 +1,24 @@
+// Amazon Google Zomato
+
+// Binary Search
+
+class Solution {
+    public int FindFloor(int[] arr, int x) {
+        int low = 0, high = arr.Length - 1;
+        int index = -1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (arr[mid] <= x) {
+                index = mid;       // arr[mid] is a candidate for floor
+                low = mid + 1;   // move right to find last occurrence
+            } else {
+                high = mid - 1;  // move left
+            }
+        }
+
+        return index;
+
+    }
+}
