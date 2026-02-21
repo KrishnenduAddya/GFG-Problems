@@ -21,7 +21,7 @@ class Solution {
             int mid = low + (high - low) / 2;
 
             // Check if we can assign k cows with at least 'mid' distance apart
-            if (CanPlaceCows(stalls, k, mid)) {
+            if (CanAssignCows(stalls, k, mid)) {
                 maximizedMinDistance = mid;   
                 low = mid + 1; // If feasible, try to maximize the distance
             }
@@ -32,7 +32,7 @@ class Solution {
         return maximizedMinDistance;
     }
 
-    private bool CanPlaceCows(int[] stalls, int k, int minDistance) {
+    private bool CanAssignCows(int[] stalls, int k, int minDistance) {
         // Assign first cow at first stall
         int lastAssigned = stalls[0];
         int assignedCowsCount = 1; 
