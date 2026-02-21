@@ -1,0 +1,57 @@
+// Flipkart PhonePe Amazon
+
+// Binary Search on Answer
+
+class Solution {
+    public int aggressiveCows(int[] stalls, int k) {
+        // Since stalls can be anywhere, 
+        // Sorting ensures we assign cows in increasing order of stall positions
+        Array.Sort(stalls);
+
+        // Minimum possible stall distance will be 1 as minimum distance 
+        // between two stalls can be 1 (closest stalls)
+        int low = 1;
+
+        // Maximum possible stall distance will be distance
+        // between first and last stall as sorted (farthest stalls)
+        int high = stalls[stalls.Length - 1] - stalls[0];
+
+        int maximizedMinDistance = 0;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            // Check if we can assign k cows with at least 'mid' distance apart
+            if (CanPlaceCows(stalls, k, mid)) {
+                maximizedMinDistance = mid;   
+                low = mid + 1; // If feasible, try to maximize the distance
+            }
+            else 
+                high = mid - 1; // Not feasible, reduce distance
+        }
+
+        return maximizedMinDistance;
+    }
+
+    private bool CanPlaceCows(int[] stalls, int k, int minDistance) {
+        // Assign first cow at first stall
+        int lastAssigned = stalls[0];
+        int assignedCowsCount = 1; 
+
+        // Traverse through stalls positions
+        foreach (int position in stalls) {
+            // Check if current stall is far enough from the last assigned cow's stall
+            if (position - lastAssigned >= minDistance) {
+                // Assign a cow
+                assignedCowsCount++;
+                lastAssigned = position;
+
+                // If we've assigned all k cows successfully, return true.
+                if (assignedCowsCount >= k) 
+                    return true;
+            }
+        }
+
+        // If we finish and haven't assigned all k cows, return false.
+        return false;
+    }
+}
